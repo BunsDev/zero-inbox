@@ -216,7 +216,7 @@ function NavItem(item: NavItemProps & { href: string }) {
     >
       {item.icon && <item.icon ref={iconRef} className="mr-2 shrink-0" />}
       <p className="mt-0.5 min-w-0 flex-1 truncate text-[13px]">{t(item.title as MessageKey)}</p>
-      {stats
+      {Array.isArray(stats) && stats.length > 0
         ? stats.find((stat) => stat.label?.toLowerCase() === item.id?.toLowerCase()) && (
             <Badge className="ml-auto shrink-0 rounded-md" variant="outline">
               {stats
