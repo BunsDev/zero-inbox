@@ -31,6 +31,7 @@ export const createDraftData = z.object({
   attachments: z.array(serializedFileSchema).transform(deserializeFiles).optional(),
   id: z.string().nullable(),
   threadId: z.string().nullable(),
+  fromEmail: z.string().nullable(),
 });
 
 export type CreateDraftData = z.infer<typeof createDraftData>;
@@ -119,6 +120,7 @@ export const userSettingsSchema = z.object({
   colorTheme: z.enum(['light', 'dark', 'system']).default('system'),
   zeroSignature: z.boolean().default(true),
   categories: categoriesSchema.optional(),
+  defaultEmailAlias: z.string().optional(),
 });
 
 export type UserSettings = z.infer<typeof userSettingsSchema>;
@@ -133,5 +135,6 @@ export const defaultUserSettings: UserSettings = {
   isOnboarded: false,
   colorTheme: 'system',
   zeroSignature: true,
+  defaultEmailAlias: '',
   categories: defaultMailCategories,
 };

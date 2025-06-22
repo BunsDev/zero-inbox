@@ -186,7 +186,7 @@ const AutoLabelingSettings = () => {
   };
 
   const handleEnableBrain = useCallback(async () => {
-    toast.promise(EnableBrain(), {
+    toast.promise(EnableBrain, {
       loading: 'Enabling autolabeling...',
       success: 'Autolabeling enabled successfully',
       error: 'Failed to enable autolabeling',
@@ -197,7 +197,7 @@ const AutoLabelingSettings = () => {
   }, []);
 
   const handleDisableBrain = useCallback(async () => {
-    toast.promise(DisableBrain(), {
+    toast.promise(DisableBrain, {
       loading: 'Disabling autolabeling...',
       success: 'Autolabeling disabled successfully',
       error: 'Failed to disable autolabeling',
@@ -822,8 +822,11 @@ function BulkSelectActions() {
 
 export const Categories = () => {
   const t = useTranslations();
+  const defaultCategoryIdInner = useDefaultCategoryId()
   const categorySettings = useCategorySettings();
-  const [activeCategory] = useQueryState('category');
+  const [activeCategory] = useQueryState('category',{
+     defaultValue: defaultCategoryIdInner,
+  });
 
   const categories = categorySettings.map((cat) => {
     const base = {
